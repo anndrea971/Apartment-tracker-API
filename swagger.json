@@ -5,7 +5,7 @@
     "description": "API for tracking apartment listings and scheduled viewings while apartment hunting",
     "version": "1.0.0"
   },
-  "host": "REPLACE_WITH_YOUR_RENDER_URL",
+  "host": "https://apartment-tracker-api-4yal.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
