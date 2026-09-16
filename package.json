@@ -1,0 +1,23 @@
+{
+  "name": "apartment-tracker-api",
+  "version": "1.0.0",
+  "description": "API for tracking apartment listings and scheduled viewings while apartment hunting (CSE341 W03 project)",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.22.3",
+    "mongodb": "^7.6.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
