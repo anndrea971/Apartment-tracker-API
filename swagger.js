@@ -7,7 +7,7 @@ const doc = {
   },
   // TODO: once you create your Render service, replace this with your real
   // domain (e.g. 'apartment-tracker-xyz.onrender.com') and re-run: node swagger.js
-  host: 'REPLACE_WITH_YOUR_RENDER_URL',
+  host: 'https://apartment-tracker-api-4yal.onrender.com',
   schemes: ['https'],
   definitions: {
     Apartment: {
@@ -34,5 +34,4 @@ const doc = {
 const outputFile = './swagger.json';
 const endpointsFiles = ['./routes/index.js'];
 
-// Regenerate swagger.json any time you add or change a route: node swagger.js
 swaggerAutogen(outputFile, endpointsFiles, doc);
