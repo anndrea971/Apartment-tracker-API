@@ -1,17 +1,11 @@
 @baseUrl = http://localhost:3000
 
-### To test against your deployed API instead, comment the line above
-### and uncomment this one once you have a Render URL:
-# @baseUrl = https://your-app-name.onrender.com
-
-### Get all apartments
 GET {{baseUrl}}/apartments
 
-### Get a single apartment by id
-### Replace with a real _id copied from the response above
+###
 GET {{baseUrl}}/apartments/REPLACE_WITH_REAL_ID
 
-### Create a new apartment
+###
 POST {{baseUrl}}/apartments
 Content-Type: application/json
 
@@ -27,7 +21,7 @@ Content-Type: application/json
   "notes": "Close to campus, has in-unit laundry"
 }
 
-### Create an apartment with missing/invalid fields (should return 400)
+###
 POST {{baseUrl}}/apartments
 Content-Type: application/json
 
@@ -36,8 +30,7 @@ Content-Type: application/json
   "rent": "not-a-number"
 }
 
-### Update an apartment
-### Replace with a real _id
+###
 PUT {{baseUrl}}/apartments/REPLACE_WITH_REAL_ID
 Content-Type: application/json
 
@@ -53,20 +46,16 @@ Content-Type: application/json
   "notes": "Rent negotiated down, application submitted"
 }
 
-### Delete an apartment
-### Replace with a real _id
+###
 DELETE {{baseUrl}}/apartments/REPLACE_WITH_REAL_ID
 
-### ---------------------------------------------------------------
-
-### Get all viewings
+###
 GET {{baseUrl}}/viewings
 
-### Get a single viewing by id
-### Replace with a real _id
+###
 GET {{baseUrl}}/viewings/REPLACE_WITH_REAL_ID
 
-### Create a viewing (apartmentId must be a real apartment's _id)
+###
 POST {{baseUrl}}/viewings
 Content-Type: application/json
 
@@ -76,7 +65,7 @@ Content-Type: application/json
   "notes": "First viewing, ask about parking"
 }
 
-### Create a viewing with a fake apartmentId (should return 400)
+###
 POST {{baseUrl}}/viewings
 Content-Type: application/json
 
@@ -85,8 +74,7 @@ Content-Type: application/json
   "scheduledDate": "2026-09-25T16:00:00Z"
 }
 
-### Update a viewing (e.g. after attending it)
-### Replace both ids with real ones
+###
 PUT {{baseUrl}}/viewings/REPLACE_WITH_REAL_VIEWING_ID
 Content-Type: application/json
 
@@ -98,6 +86,5 @@ Content-Type: application/json
   "notes": "Nice place, a bit small"
 }
 
-### Delete a viewing
-### Replace with a real _id
+###
 DELETE {{baseUrl}}/viewings/REPLACE_WITH_REAL_VIEWING_ID
