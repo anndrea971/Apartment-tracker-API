@@ -1,28 +1,38 @@
 const dns = require('node:dns');
+const util = require('node:util');
 dns.setServers(['1.1.1.1', '8.8.8.8']);
 
-// setServers() above only affects dns.resolve()-family functions. The actual
-// TCP connection (used internally by the MongoDB driver) calls dns.lookup(),
-// which always asks the OS resolver and ignores setServers(). This override
-// reroutes dns.lookup() through the resolver that does respect the custom
-// servers, falling back to the normal OS lookup if that fails. Belt-and-
-// suspenders: your Windows DNS settings should already handle this, but this
-// keeps the project portable if you ever code from a different network.
 const dnsPromises = dns.promises;
 const originalLookup = dns.lookup;
-dns.lookup = (hostname, options, callback) => {
+
+async function resolveHostname(hostname) {
+  try {
+    const addresses = await dnsPromises.resolve4(hostname);
+    if (addresses.length > 0) return { address: addresses[0], family: 4 };
+  } catch {
+    // fall through to IPv6
+  }
+  try {
+    const addresses = await dnsPromises.resolve6(hostname);
+    if (addresses.length > 0) return { address: addresses[0], family: 6 };
+  } catch {
+    // fall through to the original OS lookup
+  }
+  return util.promisify(originalLookup)(hostname);
+}
+
+function customLookup(hostname, options, callback) {
   if (typeof options === 'function') {
     callback = options;
     options = {};
   }
-  dnsPromises.resolve4(hostname)
-    .then((addresses) => callback(null, addresses[0], 4))
-    .catch(() => {
-      dnsPromises.resolve6(hostname)
-        .then((addresses) => callback(null, addresses[0], 6))
-        .catch(() => originalLookup(hostname, options, callback));
-    });
-};
+  resolveHostname(hostname)
+    .then(({ address, family }) => callback(null, address, family))
+    .catch((err) => callback(err));
+}
+customLookup[util.promisify.custom] = resolveHostname;
+
+dns.lookup = customLookup;
 
 const { MongoClient } = require('mongodb');
 
