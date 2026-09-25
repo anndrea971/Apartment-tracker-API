@@ -7,7 +7,7 @@ const doc = {
   },
   // TODO: once you create your Render service, replace this with your real
   // domain (e.g. 'apartment-tracker-xyz.onrender.com') and re-run: node swagger.js
-  host: 'https://apartment-tracker-api-4yal.onrender.com',
+  host: 'apartment-tracker-api-4yal.onrender.com',
   schemes: ['https'],
   definitions: {
     Apartment: {
