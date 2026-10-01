@@ -34,15 +34,13 @@ if (GITHUB_CLIENT_ID && GITHUB_CLIENT_SECRET && GITHUB_CALLBACK_URL) {
     }
   ));
 } else {
-  // Lets the rest of the app (all the GET/POST/etc routes) keep working
-  // even before OAuth is configured, instead of crashing on startup.
+
   console.warn(
     'GitHub OAuth is not configured (GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET / ' +
     'GITHUB_CALLBACK_URL missing) — login routes will not work until these are set.'
   );
 }
 
-// Only the user's Mongo _id goes into the session cookie itself, kept small.
 passport.serializeUser((user, done) => {
   done(null, user._id.toString());
 });

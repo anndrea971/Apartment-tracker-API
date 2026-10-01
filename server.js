@@ -15,10 +15,6 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
-  // No `cookie: { secure: true }` here on purpose: Render terminates HTTPS
-  // upstream and forwards plain HTTP to this app, so a secure-only cookie
-  // would silently fail to be set. The public-facing connection is still
-  // HTTPS either way.
 }));
 
 app.use(passport.initialize());
